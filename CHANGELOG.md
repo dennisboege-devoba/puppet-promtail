@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file. The format 
 - Require OpenVox 8, support Debian 12/13, Ubuntu 22.04/24.04, RedHat 8/9 and SLES 15
 - Require stdlib 9, archive 8, concat 9 and systemd 8 or newer
 
+### Fixed
+
+- The systemd unit starts the binary from `bin_dir` instead of `/usr/local/bin`
+
 ## [2.1.0](https://github.com/grafana/puppet-promtail/tree/2.1.0) (2021-08-31)
 
 [Full Changelog](https://github.com/grafana/puppet-promtail/compare/2.0.0...2.1.0)

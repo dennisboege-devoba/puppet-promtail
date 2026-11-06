@@ -7,8 +7,8 @@ class promtail::service {
   case $facts['kernel'] {
     'Linux': {
       systemd::unit_file { 'promtail.service':
-        source => 'puppet:///modules/promtail/promtail.service',
-        notify => Service['promtail'],
+        content => epp('promtail/promtail.service.epp'),
+        notify  => Service['promtail'],
       }
 
       service { 'promtail':

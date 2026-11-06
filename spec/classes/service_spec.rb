@@ -49,7 +49,21 @@ describe 'promtail::service' do
 
         it { is_expected.to compile }
         it { is_expected.to contain_service('promtail') }
-        it { is_expected.to contain_systemd__unit_file('promtail.service') }
+        it { is_expected.to contain_systemd__unit_file('promtail.service').with_content(%r{^ExecStart=/usr/local/bin/promtail }) }
+      end
+
+      context 'with a custom bin_dir' do
+        let(:facts) { os_facts }
+        let(:pre_condition) do
+          "class { 'promtail':
+            bin_dir               => '/opt/promtail/bin',
+            clients_config_hash   => {},
+            positions_config_hash => {},
+            scrape_configs_hash   => {},
+          }"
+        end
+
+        it { is_expected.to contain_systemd__unit_file('promtail.service').with_content(%r{^ExecStart=/opt/promtail/bin/promtail }) }
       end
     end
   end
