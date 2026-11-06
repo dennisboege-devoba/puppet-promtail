@@ -43,6 +43,11 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## Limitations
 
+Grafana ships no Promtail binaries after Loki v3.6.11, so that is the last
+version `promtail::version` can install. The default stays at `v2.0.0`; set
+`promtail::version` and `promtail::checksum` (SHA256 of the zip for your
+architecture) to install a newer one.
+
 At the moment, this module only supports Linux. Future versions will support additional OS's including Windows.
 
 ## Development
