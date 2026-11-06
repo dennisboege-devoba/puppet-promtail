@@ -1,9 +1,8 @@
 # Promtail
 
-![](https://img.shields.io/puppetforge/pdk-version/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/v/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/dt/grafana/promtail.svg?style=popout)
-[![Build Status](https://github.com/grafana/puppet-promtail/actions/workflows/pr_test.yml/badge.svg?branch=main)](https://github.com/grafana/puppet-promtail/actions/workflows/pr_test.yml)
+[![Build Status](https://github.com/grafana/puppet-promtail/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/grafana/puppet-promtail/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/grafana/puppet-promtail?stype=popout)](LICENSE)
 
 Deploy and configure Grafana's Promtail on a node.
@@ -35,13 +34,12 @@ The simplest way to get started with this module is to add `include promtail` to
 ## Reference
 
 This module is documented via
-`pdk bundle exec puppet strings generate --format markdown`.
+`bundle exec rake strings:generate:reference`.
 Please see [REFERENCE.md](REFERENCE.md) for more info.
 
 ## Changelog
 
-[CHANGELOG.md](CHANGELOG.md) is generated prior to each release via
-`pdk bundle exec rake changelog`. This process relies on labels that are applied to each pull request.
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Limitations
 
@@ -49,15 +47,19 @@ At the moment, this module only supports Linux. Future versions will support add
 
 ## Development
 
-Pull requests are welcome! A Vagrantfile is also included in this repository that can be used during development.
+Pull requests are welcome!
+
+```sh
+bundle install
+bundle exec rake test rubocop
+```
+
+CI runs these checks against the newest (`.fixtures.yml`) and the oldest supported
+dependency versions (`.fixtures-previous.yml`). To run them locally against the
+oldest ones, set `FIXTURES_YML=.fixtures-previous.yml`.
 
 ## Module Release
 
-Follow the steps below to tag a new release and push to The Forge using GitHub Actions.
-
-1. Ensure that all closed PRs are labeled appropriately.
-2. Create a "Release Prep" PR with the label "maintenance" containing changes made by the following:
-    1. Bump the module version (X.Y.Z) in `metadata.json` as appropriate based on closed PRs since the previous release. (i.e. "backwards-incomptible" is an X "release", "feature" is a Y release, and "bugfix" is a Z release)
-    2. Run `pdk bundle exec puppet strings generate --format markdown`. Any missing documentation will result in a failed pipeline.
-    3. Run `pdk bundle exec rake changelog`. Any unlabeled PRs will result in a failed pipeline.
-3. Once the PR is merged, navigate to Actions --> Publish Module --> Run workflow --> select the main branch, and Run workflow.
+1. Bump the module version in `metadata.json` and add the changes to `CHANGELOG.md`.
+2. Run `bundle exec rake strings:generate:reference` and commit `REFERENCE.md`.
+3. Tag the release commit with the version.

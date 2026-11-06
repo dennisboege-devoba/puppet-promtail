@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A function to strip the --- from the beginning of a string
 Puppet::Functions.create_function(:'promtail::strip_yaml_header') do
   # @param yaml_string

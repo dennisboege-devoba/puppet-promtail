@@ -18,8 +18,8 @@
 
 ### Functions
 
-* [`promtail::strip_yaml_header`](#promtailstrip_yaml_header): A function to strip the --- from the beginning of a string
-* [`promtail::to_yaml`](#promtailto_yaml): A function to convert a hash into yaml for the promtail config
+* [`promtail::strip_yaml_header`](#promtail--strip_yaml_header): A function to strip the --- from the beginning of a string
+* [`promtail::to_yaml`](#promtail--to_yaml): A function to convert a hash into yaml for the promtail config
 
 ## Classes
 
@@ -31,7 +31,7 @@ logs to Loki.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include promtail
@@ -109,33 +109,37 @@ class profile::logging::promtail {
 
 The following parameters are available in the `promtail` class:
 
-* [`service_enable`](#service_enable)
-* [`service_ensure`](#service_ensure)
-* [`clients_config_hash`](#clients_config_hash)
-* [`positions_config_hash`](#positions_config_hash)
-* [`scrape_configs_hash`](#scrape_configs_hash)
-* [`bin_dir`](#bin_dir)
-* [`checksum`](#checksum)
-* [`version`](#version)
-* [`server_config_hash`](#server_config_hash)
-* [`target_config_hash`](#target_config_hash)
-* [`password_file_path`](#password_file_path)
-* [`password_file_content`](#password_file_content)
-* [`source_url`](#source_url)
+* [`service_enable`](#-promtail--service_enable)
+* [`service_ensure`](#-promtail--service_ensure)
+* [`clients_config_hash`](#-promtail--clients_config_hash)
+* [`positions_config_hash`](#-promtail--positions_config_hash)
+* [`scrape_configs_hash`](#-promtail--scrape_configs_hash)
+* [`bin_dir`](#-promtail--bin_dir)
+* [`checksum`](#-promtail--checksum)
+* [`version`](#-promtail--version)
+* [`server_config_hash`](#-promtail--server_config_hash)
+* [`target_config_hash`](#-promtail--target_config_hash)
+* [`password_file_path`](#-promtail--password_file_path)
+* [`password_file_content`](#-promtail--password_file_content)
+* [`source_url`](#-promtail--source_url)
 
-##### <a name="service_enable"></a>`service_enable`
+##### <a name="-promtail--service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
 The value passed to the service resource's enable parameter for promtail's service
 
-##### <a name="service_ensure"></a>`service_ensure`
+Default value: `true`
+
+##### <a name="-promtail--service_ensure"></a>`service_ensure`
 
 Data type: `Enum['running', 'stopped']`
 
 The value passed to the service resource's ensure parameter for promtail's service
 
-##### <a name="clients_config_hash"></a>`clients_config_hash`
+Default value: `'running'`
+
+##### <a name="-promtail--clients_config_hash"></a>`clients_config_hash`
 
 Data type: `Hash`
 
@@ -143,7 +147,7 @@ Describes how Promtail connects to multiple instances of Loki, sending logs to e
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### <a name="positions_config_hash"></a>`positions_config_hash`
+##### <a name="-promtail--positions_config_hash"></a>`positions_config_hash`
 
 Data type: `Hash`
 
@@ -151,7 +155,7 @@ Describes how to save read file offsets to disk.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### <a name="scrape_configs_hash"></a>`scrape_configs_hash`
+##### <a name="-promtail--scrape_configs_hash"></a>`scrape_configs_hash`
 
 Data type: `Hash`
 
@@ -160,13 +164,15 @@ using a specified discovery method.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### <a name="bin_dir"></a>`bin_dir`
+##### <a name="-promtail--bin_dir"></a>`bin_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The directory in which to create a symlink to the promtail binary
 
-##### <a name="checksum"></a>`checksum`
+Default value: `'/usr/local/bin'`
+
+##### <a name="-promtail--checksum"></a>`checksum`
 
 Data type: `String[1]`
 
@@ -174,14 +180,16 @@ The checksum of the promtail binary.
 Note: each platform has its own checksum.
 Values can be found with each release on GitHub
 
-##### <a name="version"></a>`version`
+##### <a name="-promtail--version"></a>`version`
 
 Data type: `String[1]`
 
 The version as listed on the GitHub release page
 See https://github.com/grafana/loki/releases for a list
 
-##### <a name="server_config_hash"></a>`server_config_hash`
+Default value: `'v2.0.0'`
+
+##### <a name="-promtail--server_config_hash"></a>`server_config_hash`
 
 Data type: `Optional[Hash]`
 
@@ -190,9 +198,9 @@ is omitted.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="target_config_hash"></a>`target_config_hash`
+##### <a name="-promtail--target_config_hash"></a>`target_config_hash`
 
 Data type: `Optional[Hash]`
 
@@ -201,26 +209,26 @@ is omitted.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="password_file_path"></a>`password_file_path`
+##### <a name="-promtail--password_file_path"></a>`password_file_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
 The fully qualified path to the file containing the password used for basic auth
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="password_file_content"></a>`password_file_content`
+##### <a name="-promtail--password_file_content"></a>`password_file_content`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
 The value to be placed in the password file. This value is cast to Sensitive via
 lookup_options defined in `data/common.yaml`
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="source_url"></a>`source_url`
+##### <a name="-promtail--source_url"></a>`source_url`
 
 Data type: `Stdlib::HTTPUrl`
 
@@ -230,7 +238,7 @@ Default value: `'https://github.com/grafana/loki/releases/download'`
 
 ## Functions
 
-### <a name="promtailstrip_yaml_header"></a>`promtail::strip_yaml_header`
+### <a name="promtail--strip_yaml_header"></a>`promtail::strip_yaml_header`
 
 Type: Ruby 4.x API
 
@@ -238,7 +246,7 @@ A function to strip the --- from the beginning of a string
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 concat::fragment { 'server_config_hash':
@@ -256,7 +264,7 @@ Returns: `String` Returns the string with the leading header stripped off
 
 ##### Examples
 
-###### 
+######
 
 ```puppet
 concat::fragment { 'server_config_hash':
@@ -272,7 +280,7 @@ Data type: `String`
 
 A string that may start with the ---'s used to denote a YAML file
 
-### <a name="promtailto_yaml"></a>`promtail::to_yaml`
+### <a name="promtail--to_yaml"></a>`promtail::to_yaml`
 
 Type: Ruby 4.x API
 
@@ -280,7 +288,7 @@ A function to convert a hash into yaml for the promtail config
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 promtail::to_yaml($promtail::config_hash)
@@ -294,7 +302,7 @@ Returns: `String` Returns the YAML version of the hash as a string
 
 ##### Examples
 
-###### 
+######
 
 ```puppet
 promtail::to_yaml($promtail::config_hash)
@@ -305,4 +313,3 @@ promtail::to_yaml($promtail::config_hash)
 Data type: `Hash`
 
 A Puppet hash to be converted into YAML
-

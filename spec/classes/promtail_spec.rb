@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'promtail' do
@@ -15,7 +17,7 @@ describe 'promtail' do
                 'grpc_listen_port' => 0,
               },
             },
-            'clients_config_hash' => {
+            'clients_config_hash'   => {
               'clients' => [{
                 'url'        => 'https://logs-us-west1.grafana.net/api/prom/push',
                 'basic_auth' => {
@@ -29,7 +31,7 @@ describe 'promtail' do
                 'filename' => '/tmp/positions.yaml',
               },
             },
-            'scrape_configs_hash' => {
+            'scrape_configs_hash'   => {
               'scrape_configs' => [{
                 'job_name'       => 'system_secure',
                 'static_configs' => [{
@@ -47,6 +49,7 @@ describe 'promtail' do
 
         it { is_expected.to compile }
       end
+
       context 'without a config_hash provided' do
         let(:facts) { os_facts }
         let(:pre_condition) { 'include promtail' }
