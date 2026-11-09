@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file. The format 
 ### Changed
 
 - Require OpenVox 8, support Debian 12/13, Ubuntu 22.04/24.04, RedHat 8/9 and SLES 15
-- Require stdlib 9, archive 8, concat 9 and systemd 8 or newer
+- Require stdlib 9, archive 8, concat 9 and systemd 7 or newer
 
 ### Fixed
 
